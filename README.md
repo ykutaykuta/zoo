@@ -1,6 +1,7 @@
 # Swarm Robotics Software Team Selections
 ## Pre-requisites
 * Please install Ubuntu 18.04 or above on your laptop/WSL (Cannot verify the sanity of the codes for Windows machine)
+* If you are on Windows 10 and you have Ubuntu 18.04 neither as Dual-Boot nor in WSL (Windows Subsystem for Linux), then you may install WSL from this [link](https://docs.microsoft.com/en-us/windows/wsl/install-win10)  
 * Ensure you have Python3 and pip installed
 * Ensure you have basic understanding of Python
 * Please download/clone the latest version of this repository. If any bug is discovered, please communicate the deatils of the bug in Teams group. For the most updated codes, use `git pull swarm master`, once you have cloned the repository.
@@ -21,7 +22,8 @@ There will be meetings held for doubts and help, on a per need basis.
 ## How to Run
 
 This needs to be run either in a Ubuntu (>18.04) system or in WSL (Ubuntu 18.04) inside Windows.
-Clone this repository (either download it, or use this command on a terminal: `git clone https://github.com/`)
+
+Clone this repository (either download it, or use this command on a terminal: `git clone https://github.com/shreyase99/SwarmSoftwareTask2021`)
 
 Please install the dependencies in `requirements.txt` (you can use `pip install -r requirements.txt`).
 
@@ -43,17 +45,24 @@ In another terminal, run:
 
   `python controller.py`
 
-If you want to view the simulations, run:
+If you want to view the simulations (not for WSL setup), run:
 
   `python simulation.py`
 
-**Note for future runs:**  
-	Instead of running `setup.sh`, which may take some extra time confirming the dependencies, you may directly use:
-	`./run.sh`
+For those working on WSL, you can view the map by opening this link on browser:
 
+  `http://localhost:5000/map`
+
+Keep refreshing the page to see the changes in the map.
+
+
+**Note for future runs:**  
+Instead of running `setup.sh`, which may take some extra time confirming the dependencies, you may directly use:
+	`./run.sh`
+	
 You need not stop/restart the `run.sh` process everytime, but only when the process had been stopped (Ctrl+C)
 
-*But make sure that you have all the dependencies installed before using this.*
+	*But make sure that you have all the dependencies installed before using this.*
 
 Your task is to complete up as many functions/levels as possible in `code.py` and submit your codes through the teams assignment. You need not attempt all the levels, but sure, the more the better your chances are to get into the team. Your functions may not be optimal (in some cases, optimality cannot even be guaranteed!). We would solely judge on how you approach the problem and how much effort you've put in! :)
 
