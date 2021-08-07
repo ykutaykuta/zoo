@@ -2,10 +2,13 @@ import sys
 from api import *
 from time import sleep
 import numpy as np
+import random as r
+
 
 #######    YOUR CODE FROM HERE #######################
 import random
 grid =[]
+neigh=[[-1,-1],[-1,0],[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1]]
 
 class Node:
 	def __init__(self,value,point):
@@ -16,8 +19,6 @@ class Node:
 		self.H = 0
 		self.G = 0
 		
-neigh=[[-1,-1],[-1,0],[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1]]
-
 def isValid(pt):
 	return pt[0]>=0 and pt[1]>=0 and pt[0]<200 and pt[1]<200
 
@@ -37,9 +38,10 @@ def neighbours(point):  #returns valid neighbours
 ########## Default Level 1 ##########
 def level1(botId):
 	
-	for i in range(1,len(path)):
-		successful_move, mission_complete = send_command(botId,path[i].move)
-		pos=get_botPose_list()
+	mission_complete=False
+	botId=0
+	while(not mission_complete):
+		successful_move, mission_complete = send_command(botId,r.randint(1,8))
 		if successful_move:
 			print("YES")
 		else:
