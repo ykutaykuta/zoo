@@ -2,7 +2,7 @@
 ## Pre-requisites
 * Please install Ubuntu 18.04 or above on your laptop/WSL (Cannot verify the sanity of the codes for Windows machine)
 * If you are on Windows 10 and you have Ubuntu 18.04 neither as Dual-Boot nor in WSL (Windows Subsystem for Linux), then you may install WSL from this [link](https://docs.microsoft.com/en-us/windows/wsl/install-win10)  
-* Ensure you have Python3 and pip installed
+* Ensure you have Python3 and pip3 installed
 * Ensure you have basic understanding of Python
 * Please download/clone the latest version of this repository. If any bug is discovered, please communicate the deatils of the bug in Teams group. For the most updated codes, use `git pull origin`, once you have cloned the repository.
 
@@ -23,44 +23,57 @@ There will be meetings held for doubts and help, on a per need basis.
 
 This needs to be run either in a Ubuntu (>18.04) system or in WSL (Ubuntu 18.04) inside Windows.
 
-Clone this repository (either download it, or use this command on a terminal: `git clone https://github.com/shreyase99/SwarmSoftwareTask2021`)
+Clone this repository: (The first command takes you to the user's home directory)
+	
+	unix_user@DESKTOP:~/SwarmSoftwareTask2021$ cd
+	unix_user@DESKTOP:~/SwarmSoftwareTask2021$ git clone https://github.com/shreyase99/SwarmSoftwareTask2021
 
 GRANTING PERMISSIONS:
 Change the execution permissions of  setup.sh and run.sh by using the following commands:
 
-  `chmod +x setup.sh`
-  `chmod +x run.sh`
+	unix_user@DESKTOP:~/SwarmSoftwareTask2021$ chmod +x setup.sh
+	unix_user@DESKTOP:~/SwarmSoftwareTask2021$ chmod +x run.sh
 
 **FIRST RUN:**
 
 In one terminal, enter the following:
 
-  `./setup.sh`
+	unix_user@DESKTOP:~/SwarmSoftwareTask2021$ ./setup.sh
 
-The program would prompt you to enter a level. Start with 1 and work your way upto level 6.
+Once all dependencies are installed it would start the map server. You should see this:
+	
+	Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+	
 
-**In another terminal**, run ans select the level:
+**In another terminal**, run this command and select the level to attempt: 
 
-  `python controller.py`
+	unix_user@DESKTOP:~/SwarmSoftwareTask2021$ python3 controller.py
   
-The `controller.py` creates bots in the map and uses the solution written in `code.py` to drive the bots. Currently, `controller.py` only has a random movement code for level 1. 
-
-**To view the map** of the simulation, you can open this file: `showMap.html` in your browser (works for everyone). The map refreshes every 1 second.
-(Also try opening `http://localhost:5000/map` if you are curious.)
-
-The below python code also displays the map, but does not work in WSL without GUI support. 
-
-  `python simulation.py`
+The program would prompt you to enter a level. Start with 1 and work your way upto level 6. The `controller.py` sets up the level, creates bots in the map and, uses the solution written in `code.py` to drive the bots. 
 
 
-**Note for future runs:**  
+**To view the map** of the simulation, open this file in your browser (works for everyone): 
+
+	showMap.html
+	
+If you are on WSL, you would need to open Windows Explorer from inside the repository directory. Run the following command to view the files in Explorer. (Mind the dot).
+
+	unix_user@DESKTOP:~/SwarmSoftwareTask2021$  Explorer.exe . 
+
+Locate the `showMap.html` file and open it in the browser. The map shown in the webpage refreshes every 1 second. The following command: `python3 simulation.py` also displays the map, but does not work in WSL without GUI support. (Also, try opening `http://localhost:5000/map` if you are curious.)
+
+ 
+**NOTE FOR FUTURE RUNS:**  
+
 Instead of running `setup.sh`, which may take some extra time confirming the dependencies, you may directly use:
-	`./run.sh`
+
+	unix_user@DESKTOP:~/SwarmSoftwareTask2021$ ./run.sh
 	
 You need not stop/restart the `run.sh` process everytime, but only when the process had been stopped (Ctrl+C)
-**But make sure that you have all the dependencies installed before using this.**
+
 
 **Setup done. What next?**
+
 Your task is to complete up as many functions/levels as possible in `code.py` and submit your codes through the teams assignment. You need not attempt all the levels, but sure, the more the better your chances are to get into the team. Your functions may not be optimal (in some cases, optimality cannot even be guaranteed!). We would solely judge on how you approach the problem and how much effort you've put in! :)
 
 This problem statement comes with a sample (pretty unintelligent!) submission for level 1 problem (just makes the bot move in random steps). We shall be providing sample (again, unintelligent ones!) for higher levels too.
@@ -71,7 +84,7 @@ There is really not much to play with. There is only one file named `code.py`, w
 ## Working Procedure
 (PS: Please go through the problem description to understand the working procedure)
 
-The file `app.py` is responsible for maintaining the grid, the position of the bots, handling multiple command requests and so on. The `controller.py` is responsible for simulating multiple bots, using threads. The `code.py` file uses functions from `api.py` to send commands to `app.py` which then replicates what would happen in the zooids' world. The `simulation.py` file, constantly fetches the current map and displays it. simulation.py would not work on WSL instances without a GUI server. In order to close it, please press Ctrl+C, on the terminal you run it.
+The file `app.py` is responsible for maintaining the grid, the position of the bots, handling multiple command requests and so on. The `controller.py` is responsible for setting up the levels and, simulating multiple bots, using threads. The `code.py` file uses functions from `api.py` to send commands to `app.py` which then replicates what would happen in the zooids' world. The `simulation.py` file, constantly fetches the current map and displays it. simulation.py would not work on WSL instances without a GUI server. In order to close it, please press Ctrl+C, on the terminal you run it.
 
 To attempt a different level, just close the controller.py process and restart it with another level.
 
