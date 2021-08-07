@@ -4,7 +4,7 @@
 * If you are on Windows 10 and you have Ubuntu 18.04 neither as Dual-Boot nor in WSL (Windows Subsystem for Linux), then you may install WSL from this [link](https://docs.microsoft.com/en-us/windows/wsl/install-win10)  
 * Ensure you have Python3 and pip installed
 * Ensure you have basic understanding of Python
-* Please download/clone the latest version of this repository. If any bug is discovered, please communicate the deatils of the bug in Teams group. For the most updated codes, use `git pull swarm master`, once you have cloned the repository.
+* Please download/clone the latest version of this repository. If any bug is discovered, please communicate the deatils of the bug in Teams group. For the most updated codes, use `git pull origin`, once you have cloned the repository.
 
 ## Resources
 * [Git and Github tutorial](https://in.udacity.com/course/how-to-use-git-and-github--ud775-india)
@@ -45,7 +45,7 @@ In another terminal, run:
 
   `python controller.py`
 
-If you want to view the simulations (not for WSL setup), run:
+If you want to view the simulations (**not for WSL setup**), run:
 
   `python simulation.py`
 
@@ -53,7 +53,7 @@ For those working on WSL, you can view the map by opening this link on browser:
 
   `http://localhost:5000/map`
 
-Keep refreshing the page to see the changes in the map.
+**Keep refreshing** the page to see the changes in the map.
 
 
 **Note for future runs:**  
