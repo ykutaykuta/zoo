@@ -43,13 +43,13 @@ In another terminal, run ans select the level:
 
   `python controller.py`
 
-If you want to view the simulations (**not for WSL setup**), run:
+To view the map of the simulation, you can open this file: `showMap.html` in your browser (works for everyone). The map refreshes every 1 second.
+(Also try opening `http://localhost:5000/map` if you are curious.)
+
+The below python code also displays the map, but does not work in WSL without GUI support. 
 
   `python simulation.py`
 
-For those working on WSL, you can view the map by opening this link on browser:
-
-  `http://localhost:5000/map`
 
 **Keep refreshing** the page to see the changes in the map.
 
