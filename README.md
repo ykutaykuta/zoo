@@ -51,9 +51,6 @@ The below python code also displays the map, but does not work in WSL without GU
   `python simulation.py`
 
 
-**Keep refreshing** the page to see the changes in the map.
-
-
 **Note for future runs:**  
 Instead of running `setup.sh`, which may take some extra time confirming the dependencies, you may directly use:
 	`./run.sh`
