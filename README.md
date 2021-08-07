@@ -1,7 +1,7 @@
 # Swarm Robotics Software Team Selections
 ## Pre-requisites
 * Please install Ubuntu 18.04 or above on your laptop/WSL (Cannot verify the sanity of the codes for Windows machine)
-* If you are on Windows 10 and you have Ubuntu 18.04 neither as Dual-Boot nor in WSL (Windows Subsystem for Linux), then you may install WSL from this [link] (https://docs.microsoft.com/en-us/windows/wsl/install-win10)  
+* If you are on Windows 10 and you have Ubuntu 18.04 neither as Dual-Boot nor in WSL (Windows Subsystem for Linux), then you may install WSL from this [link](https://docs.microsoft.com/en-us/windows/wsl/install-win10)  
 * Ensure you have Python3 and pip installed
 * Ensure you have basic understanding of Python
 * Please download/clone the latest version of this repository. If any bug is discovered, please communicate the deatils of the bug in Teams group. For the most updated codes, use `git pull swarm master`, once you have cloned the repository.
