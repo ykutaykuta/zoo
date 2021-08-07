@@ -72,7 +72,7 @@ Instead of running `setup.sh`, which may take some extra time confirming the dep
 You need not stop/restart the `run.sh` process everytime, but only when the process had been stopped (Ctrl+C)
 
 
-**Setup done. What next?**
+ ## Setup done, what next?
 
 Your task is to complete up as many functions/levels as possible in `code.py` and submit your codes through the teams assignment. You need not attempt all the levels, but sure, the more the better your chances are to get into the team. Your functions may not be optimal (in some cases, optimality cannot even be guaranteed!). We would solely judge on how you approach the problem and how much effort you've put in! :)
 
