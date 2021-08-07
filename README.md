@@ -31,7 +31,7 @@ Change the execution permissions of  setup.sh and run.sh by using the following 
   `chmod +x setup.sh`
   `chmod +x run.sh`
 
-FIRST RUN:
+**FIRST RUN:**
 
 In one terminal, enter the following:
 
@@ -39,11 +39,13 @@ In one terminal, enter the following:
 
 The program would prompt you to enter a level. Start with 1 and work your way upto level 6.
 
-In another terminal, run ans select the level:
+**In another terminal**, run ans select the level:
 
   `python controller.py`
+  
+The `controller.py` creates bots in the map and uses the solution written in `code.py` to drive the bots. Currently, `controller.py` only has a random movement code for level 1. 
 
-To view the map of the simulation, you can open this file: `showMap.html` in your browser (works for everyone). The map refreshes every 1 second.
+**To view the map** of the simulation, you can open this file: `showMap.html` in your browser (works for everyone). The map refreshes every 1 second.
 (Also try opening `http://localhost:5000/map` if you are curious.)
 
 The below python code also displays the map, but does not work in WSL without GUI support. 
@@ -59,9 +61,10 @@ You need not stop/restart the `run.sh` process everytime, but only when the proc
 
 	*But make sure that you have all the dependencies installed before using this.*
 
+**What next?**
 Your task is to complete up as many functions/levels as possible in `code.py` and submit your codes through the teams assignment. You need not attempt all the levels, but sure, the more the better your chances are to get into the team. Your functions may not be optimal (in some cases, optimality cannot even be guaranteed!). We would solely judge on how you approach the problem and how much effort you've put in! :)
 
-This problem statement comes with a sample (pretty unintelligent!) submission for level 1 problem (makes the bot move in random steps). We shall be providing sample (again, unintelligent ones!) for higher levels too.
+This problem statement comes with a sample (pretty unintelligent!) submission for level 1 problem (just makes the bot move in random steps). We shall be providing sample (again, unintelligent ones!) for higher levels too.
 
 ## Code Structure
 There is really not much to play with. There is only one file named `code.py`, which you must edit and fill out the functions. You're encouraged to use solutions from the lower levels to solve problems of higher level. You can refer to the documentations in `api.py`, in case you are unsure about what a command does.
