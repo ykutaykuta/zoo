@@ -58,10 +58,9 @@ Instead of running `setup.sh`, which may take some extra time confirming the dep
 	`./run.sh`
 	
 You need not stop/restart the `run.sh` process everytime, but only when the process had been stopped (Ctrl+C)
+**But make sure that you have all the dependencies installed before using this.**
 
-	*But make sure that you have all the dependencies installed before using this.*
-
-**What next?**
+**Setup done. What next?**
 Your task is to complete up as many functions/levels as possible in `code.py` and submit your codes through the teams assignment. You need not attempt all the levels, but sure, the more the better your chances are to get into the team. Your functions may not be optimal (in some cases, optimality cannot even be guaranteed!). We would solely judge on how you approach the problem and how much effort you've put in! :)
 
 This problem statement comes with a sample (pretty unintelligent!) submission for level 1 problem (just makes the bot move in random steps). We shall be providing sample (again, unintelligent ones!) for higher levels too.
