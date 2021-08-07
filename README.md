@@ -45,9 +45,16 @@ In another terminal, run:
 
   `python controller.py`
 
-If you want to view the simulations, run:
+If you want to view the simulations (not for WSL setup), run:
 
   `python simulation.py`
+
+For those working on WSL, you can view the map by opening this link on browser:
+
+  `http://localhost:5000/map`
+
+Keep refreshing the page to see the changes in the map.
+
 
 **Note for future runs:**  
 Instead of running `setup.sh`, which may take some extra time confirming the dependencies, you may directly use:
