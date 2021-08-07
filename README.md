@@ -23,10 +23,11 @@ There will be meetings held for doubts and help, on a per need basis.
 
 This needs to be run either in a Ubuntu (>18.04) system or in WSL (Ubuntu 18.04) inside Windows.
 
-Clone this repository: (The first command takes you to the user's home directory)
+Clone this repository: (The first command takes you to the user's home directory and the last one takes you inside the task directory)
 	
-	unix_user@DESKTOP:~/SwarmSoftwareTask2021$ cd
-	unix_user@DESKTOP:~/SwarmSoftwareTask2021$ git clone https://github.com/shreyase99/SwarmSoftwareTask2021
+	unix_user@DESKTOP:~$ cd
+	unix_user@DESKTOP:~$ git clone https://github.com/shreyase99/SwarmSoftwareTask2021
+	unix_user@DESKTOP:~$ cd SwarmSoftwareTask2021
 
 GRANTING PERMISSIONS:
 Change the execution permissions of  setup.sh and run.sh by using the following commands:
