@@ -50,9 +50,10 @@ If you want to view the simulations, run:
   `python simulation.py`
 
 **Note for future runs:**  
-	Instead of running `setup.sh`, which may take some extra time confirming the dependencies, you may directly use:
+Instead of running `setup.sh`, which may take some extra time confirming the dependencies, you may directly use:
 	`./run.sh`
-	You need not stop/restart the `run.sh` process everytime, but only when the process had been stopped (Ctrl+C)
+	
+You need not stop/restart the `run.sh` process everytime, but only when the process had been stopped (Ctrl+C)
 
 	*But make sure that you have all the dependencies installed before using this.*
 
