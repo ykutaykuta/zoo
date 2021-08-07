@@ -25,8 +25,6 @@ This needs to be run either in a Ubuntu (>18.04) system or in WSL (Ubuntu 18.04)
 
 Clone this repository (either download it, or use this command on a terminal: `git clone https://github.com/shreyase99/SwarmSoftwareTask2021`)
 
-Please install the dependencies in `requirements.txt` (you can use `pip3 install -r requirements.txt`).
-
 GRANTING PERMISSIONS:
 Change the execution permissions of  setup.sh and run.sh by using the following commands:
 
