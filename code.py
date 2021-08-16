@@ -1,16 +1,19 @@
 import sys
+from builtins import print
+from itertools import permutations
+
 from api import *
 from time import sleep
 import numpy as np
 import random as r
-from math import sqrt
+from math import sqrt, fabs
 
 #######    YOUR CODE FROM HERE #######################
 import random
 grid =[]
 neigh=[[-1,-1],[-1,0],[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1]]
 
-FLT_MAX = 1000000.0
+FLT_MAX = 1000000000.0
 
 class Node:
 	def __init__(self,value,point):
@@ -42,8 +45,9 @@ zoo = [[Cell() for x in range(200)] for y in range(200)]
 def isValid(pt):
 	return pt[0]>=0 and pt[1]>=0 and pt[0]<200 and pt[1]<200
 
-def is_des(p, des):
-	if p[0] == des[0] and p[1] == des[1]:
+
+def is_des(p, des, rad):
+	if des[0] <= p[0] < des[0]+rad and des[1] <= p[1] < des[1]+rad:
 		return True
 	return False
 
@@ -65,7 +69,7 @@ def get_map():
 	back_list = get_obstacles_list()
 	red_list = get_redZone_list()
 	for ele in green_list:
-		tl= ele[0]
+		tl = ele[0]
 		br = ele[2]
 		for x in range(tl[0], br[0]+1):
 			for y in range(tl[1], br[1]+1):
@@ -77,12 +81,12 @@ def get_map():
 			for y in range(tl[1], br[1]+1):
 				zoo[x][y].color = Cell.Black
 	for ele in red_list:
-		tl= ele[0]
+		tl = ele[0]
 		br = ele[2]
 		for x in range(tl[0], br[0]+1):
 			for y in range(tl[1], br[1]+1):
 				zoo[x][y].color = Cell.Red
-	return [ele[0] for ele in green_list]
+	return [ele[0] for ele in green_list], [ele[2][0] - ele[0][0] for ele in green_list]
 
 
 def trace_path(des):
@@ -107,11 +111,22 @@ def trace_path(des):
 	return steps
 
 
+def reset_zoo():
+	for row in zoo:
+		for cell in row:
+			cell.parent = None
+			cell.g = FLT_MAX
+			cell.h = FLT_MAX
+			cell.f = FLT_MAX
+
+
 def cal_h_val(pt, des):
-	return sqrt((pt[0]-des[0])*(pt[0]-des[0]) + (pt[1]-des[1])*(pt[1]-des[1]))
+	dx = abs(pt[0] - des[0])
+	dy = abs(pt[1] - des[1])
+	return dx + dy + (sqrt(2) - 2)*min(dx, dy)
 
 
-def a_star(begin, end):
+def a_star(begin, end, end_radius):
 	zoo[begin[0]][begin[1]].g = 0
 	zoo[begin[0]][begin[1]].h = 0
 	zoo[begin[0]][begin[1]].f = 0
@@ -122,15 +137,18 @@ def a_star(begin, end):
 	while len(open_list) != 0:
 		p = open_list.pop(0)
 		is_close[p[0]][p[1]] = True
-		for ele in neigh:
+		for index, ele in enumerate(neigh):
 			_p = [p[0]+ele[0], p[1]+ele[1]]
 			if isValid(_p):
-				if is_des(_p, end):
+				if is_des(_p, end, end_radius):
 					zoo[_p[0]][_p[1]].parent = p
-					return True
+					return _p
 				else:
 					if is_close[_p[0]][_p[1]] == False and zoo[_p[0]][_p[1]].color != Cell.Black:
-						_g = zoo[p[0]][p[1]].g + 1
+						if index % 2 == 0:
+							_g = zoo[p[0]][p[1]].g + 1.414
+						else:
+							_g = zoo[p[0]][p[1]].g + 1
 						_h = cal_h_val(_p, end)
 						_f = _g + _h
 						if zoo[_p[0]][_p[1]].f > _f:
@@ -139,31 +157,75 @@ def a_star(begin, end):
 							zoo[_p[0]][_p[1]].h = _h
 							zoo[_p[0]][_p[1]].f = _f
 							zoo[_p[0]][_p[1]].parent = p
-	return False
+	return [0, 0]
+
+
+def get_min_path(graph):
+	num = len(graph)
+	perms = permutations([x for x in range(1, num)])
+	min_dis = FLT_MAX
+	for ele in perms:
+		dis = graph[0][ele[0]]
+		for index in range(1, len(ele)):
+			dis += graph[ele[index-1]][ele[index]]
+		if dis < min_dis:
+			ret = ele
+			min_dis = dis
+	return [0]+list(ret)
 
 
 ########## Default Level 1 ##########
 def level1(botId):
-	des_list = get_map()
+	des_list, rad_list = get_map()
+	print(des_list, rad_list)
 	bot_list = get_botPose_list()
-	if a_star(bot_list[0], des_list[0]):
-		path = trace_path(des_list[0])
-		while len(path) != 0:
-			step = path.pop()
-			successful_move, mission_complete = send_command(0, step)
-			if successful_move:
-				print("YES")
-			else:
-				print("NO")
-			if mission_complete:
-				print("MISSION COMPLETE")
-				break
-			pos = get_botPose_list()
-			print(pos[0])
+	end = a_star(bot_list[0], des_list[0], rad_list[0])
+	path = trace_path(end)
+	while len(path) != 0:
+		step = path.pop()
+		successful_move, mission_complete = send_command(0, step)
+		# if successful_move:
+		# 	print("YES")
+		# else:
+		# 	print("NO")
+		if mission_complete:
+			print("MISSION COMPLETE")
+			break
+		pos = get_botPose_list()
+		# print(pos[0])
+
 
 
 def level2(botId):
-	pass
+	des_list, rad_list = get_map()
+	pos = get_botPose_list()
+	print(pos)
+	nodes = pos + des_list
+	rad_list = [0] + rad_list
+	print(nodes)
+	dis = list()
+	for ele1 in nodes:
+		_dis = list()
+		for ele2 in nodes:
+			_dis.append((ele1[0] - ele2[0])*(ele1[0] - ele2[0]) + (ele1[1] - ele2[1])*(ele1[1] - ele2[1]))
+		dis.append(_dis)
+	print(dis)
+	path = get_min_path(dis)
+	print(path)
+	begin = nodes[0]
+	for index in range(1, len(path)):
+		end = a_star(begin, nodes[path[index]], rad_list[path[index]])
+		steps = trace_path(end)
+		reset_zoo()
+		begin = end
+		while len(steps) != 0:
+			step = steps.pop()
+			successful_move, mission_complete = send_command(0, step)
+			if mission_complete:
+				print("MISSION COMPLETE")
+				return
+
+
 
 def level3(botId):
 	pass
