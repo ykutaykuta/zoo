@@ -1,6 +1,7 @@
 import sys
 from builtins import print
 from itertools import permutations
+import copy
 
 from api import *
 from time import sleep
@@ -174,6 +175,25 @@ def get_min_path(graph):
 	return [0]+list(ret)
 
 
+def get_path(bot_pos, green_pos):
+	ret = [list() for x in range(len(bot_pos))]
+	greens = [x for x in range(len(green_pos))]
+	bots = copy.deepcopy(bot_pos)
+	while len(greens) > 0:
+		min_dis = FLT_MAX
+		for _begin, bot in enumerate(bots):
+			for _end in greens:
+				dis = (bot[0] - green_pos[_end][0])*(bot[0] - green_pos[_end][0]) \
+					+ (bot[1] - green_pos[_end][1])*(bot[1] - green_pos[_end][1])
+				if dis < min_dis:
+					begin = _begin
+					end = _end
+					min_dis = dis
+		ret[begin].append(end)
+		greens.remove(end)
+	return ret
+
+
 ########## Default Level 1 ##########
 def level1(botId):
 	des_list, rad_list = get_map()
@@ -183,7 +203,7 @@ def level1(botId):
 	path = trace_path(end)
 	while len(path) != 0:
 		step = path.pop()
-		successful_move, mission_complete = send_command(0, step)
+		successful_move, mission_complete = send_command(botId, step)
 		# if successful_move:
 		# 	print("YES")
 		# else:
@@ -193,7 +213,6 @@ def level1(botId):
 			break
 		pos = get_botPose_list()
 		# print(pos[0])
-
 
 
 def level2(botId):
@@ -220,15 +239,31 @@ def level2(botId):
 		begin = end
 		while len(steps) != 0:
 			step = steps.pop()
-			successful_move, mission_complete = send_command(0, step)
+			successful_move, mission_complete = send_command(botId, step)
 			if mission_complete:
 				print("MISSION COMPLETE")
 				return
 
 
-
 def level3(botId):
-	pass
+	des_list, rad_list = get_map()
+	bot_pos = get_botPose_list()
+	paths = get_path(bot_pos, des_list)
+	print(botId, paths)
+	path = paths[botId]
+	begin = bot_pos[botId]
+	for index in path:
+		end = a_star(begin, des_list[index], rad_list[index])
+		steps = trace_path(end)
+		reset_zoo()
+		begin = end
+		while len(steps) != 0:
+			step = steps.pop()
+			successful_move, mission_complete = send_command(botId, step)
+			if mission_complete:
+				print("MISSION COMPLETE")
+				return
+
 
 def level4(botId):
 	pass
