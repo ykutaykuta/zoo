@@ -266,7 +266,23 @@ def level3(botId):
 
 
 def level4(botId):
-	pass
+	des_list, rad_list = get_map()
+	bot_pos = get_botPose_list()
+	paths = get_path(bot_pos, des_list)
+	print(botId, paths)
+	path = paths[botId]
+	begin = bot_pos[botId]
+	for index in path:
+		end = a_star(begin, des_list[index], rad_list[index])
+		steps = trace_path(end)
+		reset_zoo()
+		begin = end
+		while len(steps) != 0:
+			step = steps.pop()
+			successful_move, mission_complete = send_command(botId, step)
+			if mission_complete:
+				print("MISSION COMPLETE")
+				return
 
 def level5(botId):
 	pass
