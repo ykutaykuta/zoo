@@ -147,9 +147,12 @@ def a_star(begin, end, end_radius):
 				else:
 					if is_close[_p[0]][_p[1]] == False and zoo[_p[0]][_p[1]].color != Cell.Black:
 						if index % 2 == 0:
-							_g = zoo[p[0]][p[1]].g + 1.414
+							_g = 1.414
 						else:
-							_g = zoo[p[0]][p[1]].g + 1
+							_g = + 1
+						if zoo[_p[0]][_p[1]].color == Cell.Red:
+							_g *= 2
+						_g += zoo[p[0]][p[1]].g
 						_h = cal_h_val(_p, end)
 						_f = _g + _h
 						if zoo[_p[0]][_p[1]].f > _f:
@@ -284,8 +287,25 @@ def level4(botId):
 				print("MISSION COMPLETE")
 				return
 
+
 def level5(botId):
-	pass
+	des_list, rad_list = get_map()
+	bot_pos = get_botPose_list()
+	paths = get_path(bot_pos, des_list)
+	print(botId, paths)
+	path = paths[botId]
+	begin = bot_pos[botId]
+	for index in path:
+		end = a_star(begin, des_list[index], rad_list[index])
+		steps = trace_path(end)
+		reset_zoo()
+		begin = end
+		while len(steps) != 0:
+			step = steps.pop()
+			successful_move, mission_complete = send_command(botId, step)
+			if mission_complete:
+				print("MISSION COMPLETE")
+				return
 
 def level6(botId):
 	pass
